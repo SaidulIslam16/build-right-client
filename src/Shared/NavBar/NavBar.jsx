@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Profile_pic_placeholder from '../../assets/profilepic_place_holder.png'
+import logo from '../../assets/Build Right logo.png'
 
 const NavBar = () => {
 
     const user = true;
 
     const navItems = <>
-        <li><Link>Home</Link></li>
-        <li><Link>Instructors</Link></li>
-        <li><Link>Classes</Link></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/instructors'>Instructors</Link></li>
+        <li><Link to='/classes'>Classes</Link></li>
         {user &&
             <li><Link>Dashboard </Link></li>
         }
@@ -26,7 +27,7 @@ const NavBar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <NavLink to='/' className="btn btn-ghost normal-case text-xl"><img className="h-10" src={logo} alt="build right logo" /></NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
