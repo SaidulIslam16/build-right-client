@@ -4,7 +4,7 @@ import logo from '../../assets/Build Right logo.png'
 
 const NavBar = () => {
 
-    const user = true;
+    const user = false;
 
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
@@ -53,7 +53,10 @@ const NavBar = () => {
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
                         </ul>
-                    </div> : <Link className="btn">Login</Link>
+                    </div> : <>
+                        <span className="mr-4"><Link to='/login' className="btn">Login</Link></span>
+                        <Link to='/signup' className="btn">Sign Up</Link>
+                    </>
                 }
             </div>
         </nav>
