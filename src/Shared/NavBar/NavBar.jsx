@@ -55,7 +55,7 @@ const NavBar = () => {
                         </ul>
                     </div> : <>
                         <span className="mr-4"><Link to='/login' className="btn">Login</Link></span>
-                        <Link to='/signup' className="btn">Sign Up</Link>
+                        <Link to='/signup' className="btn btn-warning">Sign Up</Link>
                     </>
                 }
             </div>

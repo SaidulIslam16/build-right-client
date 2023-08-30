@@ -1,9 +1,12 @@
 
+import signup from '../../assets/signupPage.png'
+
 const SignUp = () => {
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content md:flex">
                 <div className="w-1/2 hidden md:block">
+                    <img src={signup} alt="" />
 
                     <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                 </div>
@@ -11,6 +14,12 @@ const SignUp = () => {
                     <h1 className="text-3xl font-bold text-center">Sign Up Now!</h1>
                     <form>
                         <div className="card-body">
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input type="text" placeholder="name" className="input input-bordered" />
+                            </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
