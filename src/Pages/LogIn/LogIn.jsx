@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signup from '../../assets/signupPage.png'
 import { FaGoogle } from "react-icons/fa6";
 
@@ -25,7 +25,7 @@ const LogIn = () => {
 
     const handleGoogleSignIn = () => {
         googleSignIn()
-            .then(r => {
+            .then(() => {
                 nagivate('/')
             })
             .catch(e => console.log(e))
@@ -36,7 +36,7 @@ const LogIn = () => {
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content md:flex">
                 <div className="w-1/2 hidden md:block">
-                    <img src={signup} alt="" />
+                    <img className="h-96" src={signup} alt="" />
 
                     <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                 </div>
@@ -66,6 +66,9 @@ const LogIn = () => {
 
                         </div>
                     </form>
+                    <div className="text-center mb-5">
+                        <p>Don't Have an Account? <span className="font-bold"><Link to='/signup'>Sign Up</Link></span></p>
+                    </div>
                     <div className="mx-8">
                         <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
                     </div>

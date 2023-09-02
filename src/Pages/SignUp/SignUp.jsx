@@ -3,7 +3,7 @@ import signup from '../../assets/signupPage.png'
 import { useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa6";
 
 const SignUp = () => {
@@ -98,6 +98,9 @@ const SignUp = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="text-center mb-5">
+                        <p>Already Have an Account? <span className="font-bold"><Link to='/login'>Login</Link></span></p>
+                    </div>
                     <div className="mx-8">
                         <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
                     </div>
