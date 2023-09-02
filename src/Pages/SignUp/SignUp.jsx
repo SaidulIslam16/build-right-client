@@ -4,11 +4,12 @@ import { useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa6";
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState(false)
-    const { signUp, userProfileUpdate } = useAuth();
+    const { signUp, userProfileUpdate, googleSignIn } = useAuth();
     const nagivate = useNavigate();
 
     const onSubmit = data => {
@@ -36,6 +37,17 @@ const SignUp = () => {
                 .catch(error => console.log(error));
         }
     };
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(r => {
+                console.log(r.user);
+                nagivate('/')
+            })
+            .catch(e => console.log(e))
+    };
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content md:flex">
@@ -86,6 +98,9 @@ const SignUp = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="mx-8">
+                        <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
+                    </div>
                 </div>
             </div>
         </div>

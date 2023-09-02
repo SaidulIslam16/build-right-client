@@ -3,27 +3,35 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/UseAuth";
 import { useNavigate } from "react-router-dom";
 import signup from '../../assets/signupPage.png'
+import { FaGoogle } from "react-icons/fa6";
 
 const LogIn = () => {
     const { register, handleSubmit } = useForm();
-    const [error, setError] = useState('')
-    const { logIn, } = useAuth();
+    const [error, setError,] = useState('')
+    const { logIn, googleSignIn } = useAuth();
     const nagivate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
         logIn(data.email, data.password)
-            .then((result) => {
-                const user = result.user;
-                console.log(user);
+            .then(() => {
                 nagivate('/')
             })
             .catch(error => {
                 console.log(error);
                 setError(error.message)
             });
-
     };
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(r => {
+                nagivate('/')
+            })
+            .catch(e => console.log(e))
+    }
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content md:flex">
@@ -42,6 +50,7 @@ const LogIn = () => {
                                 </label>
                                 <input type="text" {...register("email", { required: true })} placeholder="email" className="input input-bordered" />
                             </div>
+
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
@@ -54,8 +63,12 @@ const LogIn = () => {
                             <div className="form-control mt-6">
                                 <input type="submit" className="btn btn-warning" value="Sign Up" />
                             </div>
+
                         </div>
                     </form>
+                    <div className="mx-8">
+                        <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
+                    </div>
                 </div>
             </div>
         </div>

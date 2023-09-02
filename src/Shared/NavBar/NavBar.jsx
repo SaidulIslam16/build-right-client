@@ -42,7 +42,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user ? <div className="dropdown dropdown-end">
+                    user ? <div title={user.displayName} className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 {/* TODO: need to make the profile picture show in navbar after completing the user authentication */}
@@ -52,7 +52,7 @@ const NavBar = () => {
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li>
                                 <a className="justify-between">
-                                    Profile
+                                    {user.displayName}
                                     <span className="badge">New</span>
                                 </a>
                             </li>
