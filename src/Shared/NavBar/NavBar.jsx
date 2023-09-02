@@ -1,10 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import Profile_pic_placeholder from '../../assets/profilepic_place_holder.png'
 import logo from '../../assets/Build Right logo.png'
+import useAuth from "../../hooks/UseAuth";
 
 const NavBar = () => {
 
-    const user = false;
+    const { user, logOut } = useAuth();
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(e => console.log(e))
+    }
 
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
@@ -40,7 +46,7 @@ const NavBar = () => {
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 {/* TODO: need to make the profile picture show in navbar after completing the user authentication */}
-                                {user?.displayImg ? < img /> : <img src={Profile_pic_placeholder} />}
+                                {user?.photoURL ? < img src={user?.photoURL} /> : <img src={Profile_pic_placeholder} />}
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -51,7 +57,7 @@ const NavBar = () => {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li><button onClick={handleLogout}>Logout</button></li>
                         </ul>
                     </div> : <>
                         <span className="mr-4"><Link to='/login' className="btn">Login</Link></span>

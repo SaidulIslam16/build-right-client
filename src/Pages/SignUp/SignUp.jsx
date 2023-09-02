@@ -3,11 +3,13 @@ import signup from '../../assets/signupPage.png'
 import { useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm();
     const [error, setError] = useState(false)
-    const { signUp } = useAuth();
+    const { signUp, userProfileUpdate } = useAuth();
+    const nagivate = useNavigate();
 
     const onSubmit = data => {
         if (data.password !== data.confirmPassword) {
@@ -16,9 +18,7 @@ const SignUp = () => {
         else {
             console.log(data);
             signUp(data.email, data.password)
-                .then(result => {
-                    const user = result.user;
-                    console.log(user);
+                .then(() => {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -26,6 +26,12 @@ const SignUp = () => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+
+                    userProfileUpdate(data.name, data.photoURL)
+                        .then(() => {
+                            nagivate('/')
+                        })
+                        .catch(error => console.log(error))
                 })
                 .catch(error => console.log(error));
         }
