@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import CourseCard from "../../../Shared/CourseCard/CourseCard";
+import axios from "axios";
 
 const PopularCourses = () => {
 
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        fetch('course.json')
-            .then(res => res.json())
-            .then(data => setCourses(data))
+
+        axios.get('http://localhost:5000/classes')
+            .then(response => setCourses(response.data))
+
+        // fetch('http://localhost:5000/courses')
+        //     .then(res => res.json())
+        //     .then(data => setCourses(data))
     }, [])
 
 
