@@ -12,7 +12,7 @@ const CourseCard = ({ course }) => {
                 <p>Available seats: <span className="font-bold">{available_seats}</span></p>
                 <div className="card-actions justify-end mt-4">
                     <p className="text-xl font-bold">${price}</p>
-                    <Link className="btn btn-primary">Buy Now</Link>
+                    <Link className="btn btn-primary">Select</Link>
                 </div>
             </div>
         </div>

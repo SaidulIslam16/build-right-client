@@ -15,7 +15,7 @@ const PopularCourses = () => {
 
     return (
 
-        <section className="my-10">
+        <section className="my-10 md:max-w-7xl mx-auto">
             <SectionTitle heading='Popular Courses' subHeading="Explore Our"></SectionTitle>
             <div className="grid md:grid-cols-3 gap-5">
                 {
