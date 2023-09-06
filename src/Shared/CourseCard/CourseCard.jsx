@@ -32,10 +32,15 @@ const CourseCard = ({ course }) => {
         else {
             const classInfo = { courseId: _id, name, image, instructor_name, price, email: user.email }
 
-            console.log(classInfo);
-
             axios.post('http://localhost:5000/cart', classInfo)
                 .then(res => {
+                    console.log(res.data)
+                    if (res.data === "Course Already Added") {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Already Added to your List'
+                        })
+                    }
                     if (res.data.insertedId) {
                         Swal.fire({
                             position: 'top-end',
