@@ -7,7 +7,7 @@ const UseCart = () => {
     const { user, loading } = useAuth();
 
     const { refetch, data: cart = [] } = useQuery({
-        queryKey: [cart, user?.email],
+        queryKey: [user?.email],
         enabled: !loading,
         queryFn: async () => {
             const response = await axios(`http://localhost:5000/cart?email=${user.email}`)
