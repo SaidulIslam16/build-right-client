@@ -2,10 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import Profile_pic_placeholder from '../../assets/profilepic_place_holder.png'
 import logo from '../../assets/Build Right logo.png'
 import useAuth from "../../hooks/UseAuth";
+import UseCart from "../../hooks/UseCart";
 
 const NavBar = () => {
-
     const { user, logOut } = useAuth();
+
+    const [cart] = UseCart();
+
     const handleLogout = () => {
         logOut()
             .then(() => { })
@@ -20,8 +23,8 @@ const NavBar = () => {
             <>
                 <li><Link to='/dashboard'>Dashboard </Link></li>
                 <li>
-                    <Link>
-                        Selected <div className="badge badge-secondary">+99</div>
+                    <Link to={'/cart'}>
+                        Selected <div className="badge badge-secondary">{cart.length}</div>
                     </Link>
                 </li>
             </>
@@ -30,7 +33,7 @@ const NavBar = () => {
 
 
     return (
-        <nav className="navbar bg-base-100">
+        <nav className="navbar bg-base-100 sticky top-0 z-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

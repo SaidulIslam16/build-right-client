@@ -2,12 +2,14 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/UseAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import UseCart from "../../hooks/UseCart";
 
 const CourseCard = ({ course }) => {
 
     const navigate = useNavigate();
     const { user } = useAuth();
     const locatoin = useLocation();
+    const [, refetch] = UseCart();
 
     const { _id, name, image, instructor_name, price, available_seats, students } = course;
 
@@ -42,6 +44,7 @@ const CourseCard = ({ course }) => {
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        refetch();
                     }
                 })
 
