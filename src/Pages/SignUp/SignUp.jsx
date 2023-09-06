@@ -5,6 +5,8 @@ import useAuth from "../../hooks/UseAuth";
 import Swal from 'sweetalert2'
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa6";
+import axios from "axios";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm();
@@ -13,23 +15,28 @@ const SignUp = () => {
     const nagivate = useNavigate();
 
     const onSubmit = data => {
+        // console.log(data);
         if (data.password !== data.confirmPassword) {
             setError(true)
         }
         else {
-            console.log(data);
             signUp(data.email, data.password)
                 .then(() => {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Sign Up Successful',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-
                     userProfileUpdate(data.name, data.photoURL)
                         .then(() => {
+
+                            const userInfo = { name: data.name, email: data.email, photoURL: data.photoURL, role: 'student' }
+                            // axios post api for storing users data to DB
+                            axios.post('http://localhost:5000/users', userInfo)
+                                .then(res => console.log(res.data))
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Sign Up Successful',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
                             nagivate('/')
                         })
                         .catch(error => console.log(error))
@@ -37,16 +44,6 @@ const SignUp = () => {
                 .catch(error => console.log(error));
         }
     };
-
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then(r => {
-                console.log(r.user);
-                nagivate('/')
-            })
-            .catch(e => console.log(e))
-    };
-
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -101,9 +98,7 @@ const SignUp = () => {
                     <div className="text-center mb-5">
                         <p>Already Have an Account? <span className="font-bold"><Link to='/login'>Login</Link></span></p>
                     </div>
-                    <div className="mx-8">
-                        <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

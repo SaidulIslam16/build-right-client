@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
+import SectionTitle from "../../Components/SectionTitle/SectionTitle";
+import CourseCard from "../../Shared/CourseCard/CourseCard";
+import axios from "axios";
 
 const Classes = () => {
+
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+
+        axios.get('http://localhost:5000/classes')
+            .then(response => setCourses(response.data))
+    }, [])
+
     return (
-        <div>
-            <h2>This is Classes Page</h2>
-        </div>
+        <section className="my-10 md:max-w-7xl mx-auto">
+            <SectionTitle heading="All the Classes" subHeading='Explore'></SectionTitle>
+            <div className="grid md:grid-cols-3 gap-5">
+                {
+                    courses.map((course, i) => <CourseCard key={i} course={course}></CourseCard>)
+                }
+            </div>
+
+        </section>
     );
 };
 

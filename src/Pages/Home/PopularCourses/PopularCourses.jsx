@@ -11,10 +11,6 @@ const PopularCourses = () => {
 
         axios.get('http://localhost:5000/classes')
             .then(response => setCourses(response.data))
-
-        // fetch('http://localhost:5000/courses')
-        //     .then(res => res.json())
-        //     .then(data => setCourses(data))
     }, [])
 
 

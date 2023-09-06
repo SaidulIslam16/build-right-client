@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/UseAuth";
 import { Link, useNavigate } from "react-router-dom";
 import signup from '../../assets/signupPage.png'
-import { FaGoogle } from "react-icons/fa6";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const LogIn = () => {
     const { register, handleSubmit } = useForm();
     const [error, setError,] = useState('')
-    const { logIn, googleSignIn } = useAuth();
+    const { logIn } = useAuth();
     const nagivate = useNavigate();
 
     const onSubmit = data => {
@@ -23,13 +23,6 @@ const LogIn = () => {
             });
     };
 
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then(() => {
-                nagivate('/')
-            })
-            .catch(e => console.log(e))
-    }
 
 
     return (
@@ -69,9 +62,7 @@ const LogIn = () => {
                     <div className="text-center mb-5">
                         <p>Don't Have an Account? <span className="font-bold"><Link to='/signup'>Sign Up</Link></span></p>
                     </div>
-                    <div className="mx-8">
-                        <button onClick={handleGoogleSignIn} className="btn btn-neutral w-full"> <FaGoogle /> Google</button>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
