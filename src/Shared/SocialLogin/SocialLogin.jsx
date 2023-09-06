@@ -12,7 +12,7 @@ const SocialLogin = () => {
         googleSignIn()
             .then(r => {
                 const user = r.user;
-                console.log(user);
+                // console.log(user);
 
                 const userInfo = { name: user.displayName, email: user.email, photoURL: user.photoURL, role: "student" }
                 axios.post('http://localhost:5000/users', userInfo)
