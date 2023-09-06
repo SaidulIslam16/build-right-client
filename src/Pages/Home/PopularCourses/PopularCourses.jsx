@@ -13,6 +13,9 @@ const PopularCourses = () => {
             .then(response => setCourses(response.data))
     }, [])
 
+    courses.sort((a, b) => b.students - a.students);
+    const popularCourses = courses.slice(0, 6);
+
 
     return (
 
@@ -20,7 +23,7 @@ const PopularCourses = () => {
             <SectionTitle heading='Popular Courses' subHeading="Explore Our"></SectionTitle>
             <div className="grid md:grid-cols-3 gap-5">
                 {
-                    courses.map((course, i) => <CourseCard key={i} course={course}></CourseCard>)
+                    popularCourses.map((course, i) => <CourseCard key={i} course={course}></CourseCard>)
                 }
             </div>
 

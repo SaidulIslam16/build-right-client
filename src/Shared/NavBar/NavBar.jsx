@@ -17,7 +17,14 @@ const NavBar = () => {
         <li><Link to='/instructors'>Instructors</Link></li>
         <li><Link to='/classes'>Classes</Link></li>
         {user &&
-            <li><Link>Dashboard </Link></li>
+            <>
+                <li><Link to='/dashboard'>Dashboard </Link></li>
+                <li>
+                    <Link>
+                        Selected <div className="badge badge-secondary">+99</div>
+                    </Link>
+                </li>
+            </>
         }
     </>
 
