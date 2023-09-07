@@ -10,6 +10,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import DashBoard from "../DashBoard/DashBoard/DashBoard";
 import MyCart from "../DashBoard/MyCart/MyCart";
 import UserHome from "../DashBoard/UserHome/UserHome";
+import Payment from "../DashBoard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'cart',
                         element: <MyCart></MyCart>
+                    },
+                    {
+                        path: 'payment',
+                        element: <Payment></Payment>
                     }
                 ]
             },

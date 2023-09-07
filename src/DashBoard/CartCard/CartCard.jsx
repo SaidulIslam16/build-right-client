@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CartCard = ({ item, handleItemDelete }) => {
     const { _id, name, image, instructor_name, price } = item;
 
@@ -10,7 +12,7 @@ const CartCard = ({ item, handleItemDelete }) => {
                 <div className="card-actions justify-end mt-4">
                     <p className="text-xl font-bold">${price}</p>
                     <button onClick={() => handleItemDelete(_id)} className="btn btn-error">Delete</button>
-                    <button className="btn btn-warning">Pay</button>
+                    <Link to='/dashboard/payment'><button className="btn btn-warning">Pay</button></Link>
                 </div>
             </div>
         </div>
