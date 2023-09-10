@@ -2,9 +2,14 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/UseAuth";
+import UseCart from "../../hooks/UseCart";
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ item }) => {
+    // console.log(item);
 
+    const { price, _id } = item;
+
+    const [, refetch] = UseCart();
     const { user } = useAuth();
     const stripe = useStripe();
     const elements = useElements();
@@ -13,14 +18,16 @@ const CheckoutForm = ({ price }) => {
     const [processing, setProcessing] = useState(false);
     const [transactionId, settransactionId] = useState('');
 
-    console.log(price);
+    // console.log(price);
 
     useEffect(() => {
-        axios.post('http://localhost:5000/paymentIntent', { price })
-            .then(res => {
-                console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret);
-            })
+        if (price > 0) {
+            axios.post('http://localhost:5000/paymentIntent', { price })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+        }
     }, [price])
 
     const handleSubmit = async (e) => {
@@ -84,7 +91,26 @@ const CheckoutForm = ({ price }) => {
         if (paymentIntent.status === "succeeded") {
             const transactionId = paymentIntent.id;
             settransactionId(transactionId);
-            console.log(transactionId);
+            // save payment informationo to database
+            const payment = {
+                transactionId,
+                email: user?.email,
+                amount: price,
+                date: new Date(),
+                status: "service pending",
+                productId: _id
+            }
+
+            console.log(payment);
+
+            axios.post('http://localhost:5000/payments', { payment })
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.result.insertedId) {
+                        // Will show success message;
+                        refetch();
+                    }
+                })
         }
     }
 

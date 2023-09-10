@@ -15,7 +15,7 @@ const CartCard = ({ item, handleItemDelete }) => {
                 <div className="card-actions justify-end mt-4">
                     <p className="text-xl font-bold">${price}</p>
                     <button onClick={() => handleItemDelete(_id)} className="btn btn-error">Delete</button>
-                    <button onClick={() => navigate('/dashboard/payment', { replace: true, state: { price } })} className="btn btn-warning">Pay</button>
+                    <button onClick={() => navigate('/dashboard/payment', { replace: true, state: { item } })} className="btn btn-warning">Pay</button>
                 </div>
             </div>
         </div>

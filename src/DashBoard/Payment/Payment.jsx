@@ -7,13 +7,13 @@ import { useLocation } from "react-router-dom";
 const Payment = () => {
     const stripePromise = loadStripe(import.meta.env.VITE_PaymentMethod_PK);
     const location = useLocation();
-    const price = location.state.price;
-    console.log(price);
+    const item = location.state.item;
+    // console.log(item);
     return (
         <div>
             <SectionTitle subHeading="Provide" heading="Payment Info"></SectionTitle >
             <Elements stripe={stripePromise}>
-                <CheckoutForm price={price}></CheckoutForm>
+                <CheckoutForm item={item}></CheckoutForm>
             </Elements>
 
         </div>
